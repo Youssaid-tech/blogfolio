@@ -1,0 +1,125 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../consts';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const pageTitle = title ? `${title} — ${SITE.name}` : SITE.title;
+const pageDesc = description ?? SITE.description;
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
+---
+
+<!doctype html>
+<html lang="en" class="theme-dark lang-en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts: Clash Display + Switzer (Fontshare), JetBrains Mono (Google) -->
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700,500&f[]=switzer@400,500,600,700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
+
+    <!-- Set theme + language before paint to avoid a flash. -->
+    <script is:inline>
+      (function () {
+        const d = document.documentElement;
+        const theme = localStorage.getItem('theme') || 'dark';
+        d.classList.remove('theme-dark', 'theme-light');
+        d.classList.add('theme-' + theme);
+        const lang = localStorage.getItem('lang') || 'en';
+        d.classList.remove('lang-en', 'lang-fr');
+        d.classList.add('lang-' + lang);
+        d.setAttribute('lang', lang);
+      })();
+    </script>
+  </head>
+  <body>
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <script is:inline>
+      // --- Theme toggle ---
+      const root = document.documentElement;
+      document.getElementById('theme-toggle')?.addEventListener('click', () => {
+        const next = root.classList.contains('theme-dark') ? 'light' : 'dark';
+        root.classList.remove('theme-dark', 'theme-light');
+        root.classList.add('theme-' + next);
+        localStorage.setItem('theme', next);
+      });
+
+      // --- Language toggle ---
+      function setLang(lang) {
+        root.classList.remove('lang-en', 'lang-fr');
+        root.classList.add('lang-' + lang);
+        root.setAttribute('lang', lang);
+        localStorage.setItem('lang', lang);
+        syncLangButtons();
+      }
+      function syncLangButtons() {
+        const cur = root.classList.contains('lang-fr') ? 'fr' : 'en';
+        document.querySelectorAll('.lang-btn').forEach((b) => {
+          b.classList.toggle('active', b.dataset.lang === cur);
+        });
+      }
+      document.querySelectorAll('.lang-btn').forEach((b) => {
+        b.addEventListener('click', () => setLang(b.dataset.lang));
+      });
+      syncLangButtons();
+
+      // --- Nav scrolled state ---
+      const nav = document.getElementById('nav');
+      const onScroll = () => nav?.classList.toggle('scrolled', window.scrollY > 8);
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // --- Mobile menu ---
+      const mt = document.getElementById('nav-toggle');
+      const mm = document.getElementById('mobile-menu');
+      mt?.addEventListener('click', () => mm?.classList.toggle('open'));
+      mm?.querySelectorAll('a').forEach((a) =>
+        a.addEventListener('click', () => mm.classList.remove('open')),
+      );
+
+      // --- Reveal on scroll ---
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('in');
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

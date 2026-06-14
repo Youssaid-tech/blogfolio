@@ -1,0 +1,68 @@
+---
+import { SITE } from '../consts';
+
+// Resolve active section for the blog vs. home links.
+const path = Astro.url.pathname;
+const onBlog = path.startsWith('/blog');
+---
+
+<nav id="nav">
+  <div class="container nav-inner">
+    <a href="/" class="nav-logo">{SITE.name}<span class="dot">.</span></a>
+
+    <div class="nav-links">
+      <a href="/#about"><span class="en">About</span><span class="fr">À propos</span></a>
+      <a href="/#skills"><span class="en">Skills</span><span class="fr">Compétences</span></a>
+      <a href="/#experience"><span class="en">Experience</span><span class="fr">Expérience</span></a>
+      <a href="/blog" aria-current={onBlog ? 'page' : undefined}>Blog</a>
+      <a href="/#contact">Contact</a>
+    </div>
+
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+      </div>
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+        <span class="t-dark">☾</span><span class="t-light">☀</span>
+      </button>
+      <button class="icon-btn nav-toggle" id="nav-toggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .t-light { display: none; }
+  :global(html.theme-light) .t-dark { display: none; }
+  :global(html.theme-light) .t-light { display: inline; }
+
+  /* mobile slide-down menu */
+  .mobile-menu {
+    display: none;
+  }
+  @media (max-width: 860px) {
+    .mobile-menu {
+      display: grid;
+      gap: 0.2rem;
+      padding: 0.5rem 0 1.2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu:not(.open) { display: none; }
+    .mobile-menu a {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      padding: 0.6rem 0;
+      color: var(--text-mid);
+    }
+  }
+</style>
+
+<div class="container">
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/#about"><span class="en">About</span><span class="fr">À propos</span></a>
+    <a href="/#skills"><span class="en">Skills</span><span class="fr">Compétences</span></a>
+    <a href="/#experience"><span class="en">Experience</span><span class="fr">Expérience</span></a>
+    <a href="/blog">Blog</a>
+    <a href="/#contact">Contact</a>
+  </div>
+</div>

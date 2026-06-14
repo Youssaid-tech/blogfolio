@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="404">
+  <section class="section nf">
+    <div class="container">
+      <p class="mono code">404</p>
+      <h1 class="section-title">
+        <span class="en">This page took the day off</span>
+        <span class="fr">Cette page a pris sa journée</span>
+      </h1>
+      <p class="section-sub">
+        <span class="en">The resource you requested isn't here. Let's get you back.</span>
+        <span class="fr">La ressource demandée est introuvable. Retournons en lieu sûr.</span>
+      </p>
+      <div class="nf-actions">
+        <a href="/" class="btn btn-primary"><span class="en">← Home</span><span class="fr">← Accueil</span></a>
+        <a href="/blog" class="btn">Blog</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf { min-height: 60vh; display: grid; align-items: center; }
+  .code { font-size: clamp(4rem, 18vw, 11rem); line-height: 1; color: var(--accent); font-weight: 600; }
+  .nf-actions { display: flex; gap: 0.8rem; margin-top: 2rem; flex-wrap: wrap; }
+</style>

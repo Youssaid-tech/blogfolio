@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="28" fill="#0b0c0e"/>
+  <text x="50%" y="52%" dy=".06em" text-anchor="middle" dominant-baseline="middle"
+        font-family="'JetBrains Mono', ui-monospace, monospace" font-size="62"
+        font-weight="700" fill="#c9f24a">Y</text>
+  <circle cx="92" cy="92" r="7" fill="#c9f24a"/>
+</svg>

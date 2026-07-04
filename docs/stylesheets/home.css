@@ -286,6 +286,13 @@
 .md-typeset .portfolio .pf-btn--primary { color: #fff; }
 .md-typeset .portfolio .pf-arrow { color: var(--pf-azure); }
 
+/* Kill Material's native list bullet on the experience points — Material's
+   `.md-typeset ul` re-adds a marker that out-specifies `.pf-job__points`, so we
+   get a black dot next to our blue `::before` square. Keep only the blue one. */
+.md-typeset .pf-job__points,
+.md-typeset .pf-job__points > li { list-style: none; }
+.md-typeset .pf-job__points > li::marker { content: ""; }
+
 /* Home page is a full-bleed light takeover (Material header hidden): remove the
    top margin/spacer so the dark (slate) page background can't show above the
    portfolio's own command bar. Scoped via :has() so only the home page is hit. */

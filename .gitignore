@@ -1,24 +1,17 @@
-# build output
-dist/
-# generated types
-.astro/
+# MkDocs build output
+/site/
 
-# dependencies
-node_modules/
+# Python virtualenv
+.venv/
+__pycache__/
+*.pyc
 
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-
-# environment variables
-.env
-.env.production
-
-# macOS-specific files
+# OS / editor
 .DS_Store
+.vscode/
 
-# jetbrains setting folder
-.idea/
+# WSL / Windows artifacts
+*:Zone.Identifier
+
+# Source design bundles (not part of the site)
+*.zip

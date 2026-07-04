@@ -1,0 +1,96 @@
+site_name: Youssef OUSSAID
+site_url: https://youssef.oussaid.net
+site_author: Youssef OUSSAID
+site_description: >-
+  DevOps & Systems Engineer with 9 years of experience — Azure Cloud, Kubernetes,
+  CI/CD and infrastructure automation. Plus a learning log on RHCSA, Kubernetes,
+  Azure, IaC, configuration management and observability.
+
+copyright: Copyright &copy; 2026 Youssef OUSSAID
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: en
+  font:
+    text: IBM Plex Sans
+    code: JetBrains Mono
+  logo: assets/portfolio/azure-logo.svg
+  icon:
+    repo: fontawesome/brands/github
+  favicon: assets/favicon.svg
+  # Single light "Azure" scheme — matches the always-light portfolio.
+  palette:
+    scheme: default
+    primary: white
+    accent: blue
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow
+
+nav:
+  - Home: index.md
+  - Blog:
+      - blog/index.md
+
+plugins:
+  - search
+  - blog:
+      blog_dir: blog
+      blog_toc: true
+      archive: false
+      post_date_format: medium
+      post_url_format: "{categories}/{slug}"
+      post_readtime: true
+      pagination_per_page: 10
+  - tags
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Youssaid-tech
+      name: GitHub
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/youssef-oussaid-95121b135
+      name: LinkedIn
+    - icon: fontawesome/solid/envelope
+      link: mailto:oussaid-youssef@outlook.fr
+      name: Email
+
+extra_css:
+  - stylesheets/extra.css
+  - stylesheets/home.css
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg

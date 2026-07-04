@@ -1,0 +1,216 @@
+{#-
+  Portfolio landing page — custom Material template (Azure-console redesign).
+
+  THE redesign surface. All portfolio markup lives here; styles live in
+  docs/stylesheets/home.css. Everything is scoped under `.portfolio` (pf- prefix)
+  so it can't leak into the blog/docs. Content lives in the Jinja arrays below —
+  edit there to change copy. Links/assets use the `| url` filter for correct paths.
+-#}
+{% extends "main.html" %}
+
+{% block content %}
+<div class="portfolio">
+
+  <div class="pf-wrap">
+
+    <!-- breadcrumb -->
+    <div class="pf-crumb">Home <span>›</span> Engineers <span>›</span> <b>youssef-oussaid</b></div>
+
+    <!-- ============ RESOURCE HEADER ============ -->
+    <section class="pf-header">
+      <div class="pf-profile">
+        <div class="pf-profile__top">
+          <span class="pf-profile__icon">
+            <img src="{{ 'assets/portfolio/az-hero.svg' | url }}" alt="Azure" width="38" height="38">
+          </span>
+          <div>
+            <span class="pf-profile__kind">Resource · Engineer</span>
+            <h1 class="pf-name">Youssef OUSSAID</h1>
+          </div>
+        </div>
+        <p class="pf-role">DevOps &amp; Systems Engineer <span>/</span> Azure Cloud Specialist</p>
+        <p class="pf-lede">Nine years designing, automating and operating resilient
+          infrastructure across Azure Cloud, Kubernetes orchestration, CI/CD pipelines
+          and Linux systems at scale.</p>
+        <div class="pf-actions">
+          <a class="pf-btn pf-btn--primary" href="{{ 'assets/CV_Youssef_OUSSAID_EN_2026.pdf' | url }}">&#8595; Download CV</a>
+          <a class="pf-btn" href="{{ 'blog/' | url }}">View the blog <span class="pf-arrow">&#8594;</span></a>
+        </div>
+      </div>
+
+      <aside class="pf-essentials">
+        <div class="pf-essentials__head">
+          <span>&#9662; Essentials</span>
+          <span class="pf-avail"><i></i>Available</span>
+        </div>
+        <div class="pf-essentials__body">
+          {% set essentials = [
+            ["role", "DevOps & Systems Engineer"],
+            ["location", "France · Remote-friendly"],
+            ["experience", "9 years in production"],
+            ["certifications", "AZ-104 · AZ-400 · ITIL 4"],
+            ["cloud", "Azure · AWS"],
+            ["core stack", "Azure · Kubernetes · Terraform · Ansible · Linux"],
+            ["languages", "French · English · Arabic"]
+          ] %}
+          {% for k, v in essentials %}
+          <div class="pf-kv"><span class="pf-kv__k">{{ k }}</span><span class="pf-kv__v">{{ v }}</span></div>
+          {% endfor %}
+          <div class="pf-kv"><span class="pf-kv__k">resource id</span><span class="pf-kv__v pf-kv__id">/eng/youssef-oussaid</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section class="pf-section" id="experience">
+      <div class="pf-eyebrow"><span>01 / Experience</span><i></i></div>
+      <h2 class="pf-h2">Deployment history</h2>
+      <div class="pf-timeline">
+        {% set jobs = [
+          ["Ministry of National Education, France", "Expert · Production & Operating Systems", "Dec 2024 — Present",
+           "assets/portfolio/az-exp-servers.svg",
+           ["Deployment and management of Rancher / Kubernetes clusters in production for national educational applications",
+            "Design and implementation of CI/CD pipelines with GitLab CI/CD for automated deployments",
+            "N3 production support: incident management, root-cause analysis and resolution for critical workloads",
+            "PostgreSQL database cluster management: performance tuning, high availability and stability",
+            "Dockerized application management and deployment automation with Ansible Core",
+            "Security hardening and infrastructure updates for production systems",
+            "Full project documentation from planning to production: architecture, runbooks, post-mortems"],
+           "Kubernetes · Rancher · GitLab CI · PostgreSQL · Ansible · Prometheus · Grafana"],
+          ["SKYLLIT", "DevOps & Cloud Engineer", "Mar 2023 — Nov 2024",
+           "assets/portfolio/az-exp-devops.svg",
+           ["Designed and implemented complete Azure Cloud architectures for multi-client SaaS and business workloads",
+            "Set up and managed dev, staging and production environments with infrastructure as code (Terraform)",
+            "Implemented GitHub Actions CI/CD pipelines for automated deployments and release management",
+            "Designed and deployed a PostgreSQL High Availability cluster with SOC2 compliance (Hedgeguard project)",
+            "Architected a highly available and scalable Kubernetes cluster on GCP (GKE)",
+            "Deployed a complete Zabbix monitoring infrastructure with custom scripts and alerting rules",
+            "Set up ITIL-compliant ticketing (OTRS, GLPI) with custom workflows and Keycloak IAM integration",
+            "Ensured N3 production support and application observability for all client infrastructure"],
+           "Azure · Terraform · GitHub Actions · PostgreSQL HA · GKE · Zabbix · Keycloak"],
+          ["Groupe LabelVie", "Linux Systems & Virtualization Engineer", "Aug 2022 — Feb 2023",
+           "assets/portfolio/az-exp-cloud.svg",
+           ["Deployed Ansible centralized management for all Linux servers, with patch management and automation",
+            "VMware vSphere upgrade to 7.0U3 with vCenter centralization and backup policy implementation",
+            "Infrastructure and application monitoring with PRTG, Dynatrace and Prometheus",
+            "DNS architecture deployment and migration; private cloud storage with OwnCloud",
+            "N2/N3 Linux and VMware incident resolution; DevOps environments administration (GitLab, Docker)"],
+           "Ansible · VMware vSphere · vCenter · PRTG · Dynatrace · Prometheus · Linux"],
+          ["Percall Développement", "Systems & Network Administrator", "Apr 2018 — Aug 2022",
+           "assets/portfolio/az-exp-web.svg",
+           ["Led complete Azure infrastructure migration: VMs, SQL databases, network configuration, site-to-site VPN",
+            "DevOps implementation: Jenkins CI/CD pipelines, Artifactory release automation, Prometheus/Grafana monitoring",
+            "SCCM deployment for centralized Windows fleet management, security patches and compliance configurations",
+            "Scripting and automation for CPS Windchill patch installation with a full CI/CD delivery pipeline",
+            "Office 365 tenant setup and migration (mailboxes, Skype to Teams, Exchange Online administration)",
+            "New-site network architecture: routers, switches, firewall, VLAN, ACL, datacenter security and BCP",
+            "Azure Backup with site-to-site VPN and disaster recovery plan definition"],
+           "Azure · Jenkins · Artifactory · Docker · SCCM · Office 365 · Prometheus"],
+          ["Previance Assurance", "Systems & Network Technician", "Feb 2017 — Apr 2018",
+           "assets/portfolio/az-exp-connect.svg",
+           ["VoIP Asterisk server administration (trunks, inbound/outbound routes, security, monitoring)",
+            "Active Directory and GPO management; N1/N2 helpdesk support"],
+           "Linux · Asterisk · Active Directory · GPO · Windows Server"]
+        ] %}
+        {% for company, role, when, icon, points, tags in jobs %}
+        <article class="pf-job">
+          <span class="pf-job__icon"><img src="{{ icon | url }}" alt="" width="28" height="28"></span>
+          <div class="pf-job__main">
+            <div class="pf-job__head">
+              <h3>{{ company }}</h3>
+              <span class="pf-job__when">{{ when }}</span>
+            </div>
+            <span class="pf-job__role">{{ role }}</span>
+            <ul class="pf-job__points">
+              {% for p in points %}<li>{{ p }}</li>{% endfor %}
+            </ul>
+            <p class="pf-job__tags">{{ tags }}</p>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- ============ EDUCATION ============ -->
+    <section class="pf-section" id="education">
+      <div class="pf-eyebrow"><span>02 / Education</span><i></i></div>
+      <h2 class="pf-h2">Diplomas &amp; certifications</h2>
+      <div class="pf-edu">
+        <div class="pf-edu__list">
+          {% set education = [
+            ["2023", "Master's in Computer Engineering", "Big Data & Cloud Computing · Evening studies"],
+            ["2021", "Professional Bachelor's", "Network Systems & Security · Evening studies"],
+            ["2017", "Specialized Technician", "Network & Systems"]
+          ] %}
+          {% for year, title, detail in education %}
+          <div class="pf-degree">
+            <span class="pf-degree__year">{{ year }}</span>
+            <div>
+              <h3>{{ title }}</h3>
+              <p>{{ detail }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="pf-certs">
+          <div class="pf-certs__head">Certifications</div>
+          <div class="pf-certs__body">
+            {% set certs = [
+              ["assets/portfolio/cert-az400.webp", "AZ-400", "Azure DevOps Engineer Expert"],
+              ["assets/portfolio/cert-az104.png", "AZ-104", "Azure Administrator Associate"],
+              ["assets/portfolio/cert-itil4.png", "ITIL 4", "Practitioner · Information Security Mgmt"]
+            ] %}
+            {% for badge, title, detail in certs %}
+            <div class="pf-cert">
+              <img src="{{ badge | url }}" alt="{{ title }}" width="42" height="42">
+              <div><strong>{{ title }}</strong><span>{{ detail }}</span></div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STACK ============ -->
+    <section class="pf-section" id="stack">
+      <div class="pf-eyebrow"><span>03 / Stack</span><i></i></div>
+      <h2 class="pf-h2">Resources &amp; services</h2>
+      <div class="pf-skills">
+        {% set skills = [
+          ["https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg", "DevOps & CI/CD", "GitLab CI/CD · GitHub Actions · Jenkins · Azure DevOps · Pipelines · Repos · Artifacts"],
+          ["https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg", "Containers & Orchestration", "Kubernetes · Helm · RBAC · Rancher · Docker · Podman · AKS · EKS · GKE"],
+          ["https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg", "Infrastructure as Code", "Terraform (modules · state · workspaces) · Ansible (playbooks · roles · dynamic inventory) · Git · YAML"],
+          ["https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg", "Cloud", "Microsoft Azure · AKS · Azure Backup · Azure Monitor · Azure DevOps · VPN Gateway · AWS · EKS"],
+          ["https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg", "Systems & Virtualization", "RHEL · Ubuntu · Debian · CentOS · IBM AIX · VMware ESXi · vSphere · vCenter · Proxmox VE"],
+          ["https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg", "Monitoring & Observability", "Prometheus · Grafana · ELK Stack · Zabbix · PRTG · Dynatrace · Azure Monitor · Nagios"]
+        ] %}
+        {% for logo, name, items in skills %}
+        <div class="pf-skill">
+          <span class="pf-skill__icon"><img src="{{ logo }}" alt="" width="30" height="30" loading="lazy"></span>
+          <h3>{{ name }}</h3>
+          <p>{{ items }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="pf-section" id="contact">
+      <div class="pf-eyebrow"><span>04 / Contact</span><i></i></div>
+      <div class="pf-contact">
+        <div>
+          <h2 class="pf-h2">Let's work together</h2>
+          <p class="pf-lede">Open to DevOps, Cloud and Systems Engineering roles. A&nbsp;project, a role, or a question, reach out.</p>
+        </div>
+        <div class="pf-contact__links">
+          <a class="pf-btn pf-btn--primary" href="mailto:oussaid-youssef@outlook.fr">Email <span>&#8594;</span></a>
+          <a class="pf-link" href="https://linkedin.com/in/youssef-oussaid-95121b135">LinkedIn <span>&#8599;</span></a>
+          <a class="pf-link" href="https://github.com/Youssaid-tech">GitHub <span>&#8599;</span></a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+{% endblock %}

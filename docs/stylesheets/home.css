@@ -1,0 +1,326 @@
+/* ============================================================
+   Portfolio landing page — Azure-console redesign.
+   All rules scoped under `.portfolio`; classes use the `pf-` prefix.
+   Self-contained light "white / Azure" palette (independent of the
+   Material dark/light toggle) so the console look stays consistent.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+.portfolio {
+  /* palette */
+  --pf-bg:        #f4f8fd;
+  --pf-card:      #ffffff;
+  --pf-border:    #e2ebf5;
+  --pf-line:      #f0f5fa;
+  --pf-ink:       #0e1b2c;
+  --pf-ink-2:     #233448;
+  --pf-muted:     #41546e;
+  --pf-muted-2:   #5a6b82;
+  --pf-faint:     #8a99ad;
+  --pf-tint:      #eef5fe;
+  --pf-tint-bd:   #dbe8f7;
+  --pf-azure:     #0067c0;
+  --pf-azure-2:   #0078d4;
+  --pf-green:     #107c41;
+  --pf-mono:      "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --pf-sans:      "Segoe UI", "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --pf-shadow:    0 10px 26px -20px rgba(0,80,180,0.25);
+  --pf-shadow-lg: 0 18px 40px -26px rgba(0,80,180,0.28);
+
+  font-family: var(--pf-sans);
+  color: var(--pf-ink);
+  background: var(--pf-bg);
+  background-image:
+    radial-gradient(80% 50% at 90% -6%, rgba(0,120,212,0.10), transparent 60%),
+    radial-gradient(60% 40% at 4% 2%, rgba(80,230,255,0.10), transparent 60%);
+  -webkit-font-smoothing: antialiased;
+  margin: 0 calc(50% - 50vw);        /* break out of Material's content padding */
+  padding: 0;
+  min-height: 80vh;
+}
+.portfolio *,
+.portfolio *::before,
+.portfolio *::after { box-sizing: border-box; }
+
+.portfolio a { text-decoration: none; }
+.portfolio ::selection { background: rgba(0,120,212,0.18); }
+
+.pf-wrap { max-width: 1120px; margin-inline: auto; padding: 0 26px 110px; }
+
+/* ---------- command bar ---------- */
+.pf-bar {
+  display: flex; align-items: center; gap: 20px;
+  padding: 12px 26px;
+  border-bottom: 1px solid var(--pf-border);
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(8px);
+  position: sticky; top: 0; z-index: 5;
+}
+.pf-bar__brand { display: flex; align-items: center; gap: 10px; }
+.pf-bar__brand img { display: block; }
+.pf-bar__brand span { font-size: 14px; font-weight: 600; }
+.pf-bar__brand b { color: var(--pf-azure); font-weight: 600; }
+.pf-bar__search {
+  flex: 1; max-width: 420px;
+  display: flex; align-items: center; gap: 9px;
+  padding: 7px 13px;
+  border: 1px solid var(--pf-tint-bd); border-radius: 6px;
+  background: #fff; color: #7186a1; font-size: 13px;
+}
+.pf-bar__search kbd {
+  margin-left: auto; font-family: var(--pf-mono); font-size: 11px; color: #9aabc2;
+  border: 1px solid var(--pf-border); border-radius: 4px; padding: 1px 5px;
+}
+.pf-bar__meta { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+.pf-region {
+  display: flex; align-items: center; gap: 7px;
+  font-family: var(--pf-mono); font-size: 12px; color: var(--pf-muted-2);
+}
+.pf-region i { width: 6px; height: 6px; border-radius: 50%; background: var(--pf-green); }
+.pf-avatar {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: linear-gradient(135deg, #0078D4, #50E6FF);
+  font-size: 12px; font-weight: 600; color: #fff;
+}
+
+/* ---------- breadcrumb ---------- */
+.pf-crumb {
+  font-family: var(--pf-mono); font-size: 12px; color: var(--pf-faint);
+  padding: 22px 0 20px;
+}
+.pf-crumb span { color: #c2cfe0; }
+.pf-crumb b { color: var(--pf-muted-2); font-weight: 400; }
+
+/* ---------- resource header ---------- */
+.pf-header {
+  display: grid; grid-template-columns: 1.25fr 1fr; gap: 28px; align-items: stretch;
+}
+.pf-profile {
+  border: 1px solid var(--pf-border); border-radius: 16px; background: var(--pf-card);
+  box-shadow: var(--pf-shadow-lg); padding: 32px 34px;
+  display: flex; flex-direction: column;
+}
+.pf-profile__top { display: flex; align-items: center; gap: 18px; }
+.pf-profile__icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 62px; height: 62px; border-radius: 14px;
+  background: var(--pf-tint); border: 1px solid var(--pf-tint-bd);
+}
+.pf-profile__icon img { display: block; }
+.pf-profile__kind {
+  display: block; font-family: var(--pf-mono); font-size: 12px; color: #7186a1;
+}
+.pf-name {
+  margin: 4px 0 0; font-size: clamp(30px, 4vw, 44px); font-weight: 600;
+  letter-spacing: -0.025em; line-height: 1.05; color: var(--pf-ink);
+}
+.pf-role {
+  margin: 22px 0 0; font-size: 14px; color: var(--pf-muted-2); font-family: var(--pf-mono);
+}
+.pf-role span { color: #c2cfe0; }
+.pf-lede { margin: 14px 0 0; max-width: 48ch; color: var(--pf-muted); font-size: 16px; line-height: 1.7; }
+.pf-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: auto; padding-top: 28px; }
+
+.pf-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 500; padding: 11px 20px; border-radius: 8px;
+  border: 1px solid var(--pf-tint-bd); background: #fff; color: var(--pf-ink);
+  transition: border-color .15s ease, transform .15s ease;
+}
+.pf-btn:hover { border-color: #b9d3f0; transform: translateY(-1px); }
+.pf-btn--primary {
+  font-weight: 600; border: none; color: #fff;
+  background: linear-gradient(135deg, #0078D4, #3aa0ff);
+}
+.pf-btn--primary:hover { filter: brightness(1.05); }
+.pf-arrow { color: var(--pf-azure); }
+
+/* ---------- essentials panel ---------- */
+.pf-essentials {
+  border: 1px solid var(--pf-border); border-radius: 16px; background: var(--pf-card);
+  box-shadow: var(--pf-shadow-lg); overflow: hidden;
+}
+.pf-essentials__head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 15px 20px; border-bottom: 1px solid #eaf1f8;
+  font-size: 13px; font-weight: 600; color: var(--pf-ink-2);
+}
+.pf-avail {
+  display: flex; align-items: center; gap: 7px;
+  font-family: var(--pf-mono); font-size: 11px; color: var(--pf-green);
+  background: rgba(16,124,65,0.09); border: 1px solid rgba(16,124,65,0.25);
+  border-radius: 100px; padding: 3px 10px;
+}
+.pf-avail i { width: 6px; height: 6px; border-radius: 50%; background: var(--pf-green); }
+.pf-essentials__body { padding: 6px 20px 16px; }
+.pf-kv {
+  display: grid; grid-template-columns: 112px 1fr; gap: 14px;
+  padding: 10px 0; border-bottom: 1px solid var(--pf-line);
+}
+.pf-kv:last-child { border-bottom: none; }
+.pf-kv__k { font-family: var(--pf-mono); font-size: 12px; color: var(--pf-faint); }
+.pf-kv__v { font-size: 13.5px; color: var(--pf-ink-2); }
+.pf-kv__id { font-family: var(--pf-mono); font-size: 12px; color: var(--pf-azure); }
+
+/* ---------- section heads ---------- */
+.pf-section { padding-top: 70px; }
+.pf-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 26px; }
+.pf-eyebrow span {
+  font-family: var(--pf-mono); font-size: 12px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--pf-azure);
+}
+.pf-eyebrow i { flex: 1; height: 1px; background: var(--pf-border); }
+.pf-h2 {
+  font-size: clamp(26px, 3.4vw, 36px); font-weight: 600; letter-spacing: -0.025em;
+  margin: 0 0 30px; color: var(--pf-ink);
+}
+
+/* ---------- experience ---------- */
+.pf-timeline { display: grid; gap: 14px; }
+.pf-job {
+  border: 1px solid var(--pf-border); border-radius: 14px; background: var(--pf-card);
+  box-shadow: var(--pf-shadow); padding: 24px 26px;
+  display: grid; grid-template-columns: 46px 1fr; gap: 20px;
+}
+.pf-job__icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 46px; height: 46px; border-radius: 11px;
+  background: var(--pf-tint); border: 1px solid var(--pf-tint-bd);
+}
+.pf-job__icon img { display: block; }
+.pf-job__head {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px;
+}
+.pf-job__head h3 { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: var(--pf-ink); }
+.pf-job__when { font-family: var(--pf-mono); font-size: 12px; color: var(--pf-faint); }
+.pf-job__role {
+  display: inline-block; margin: 10px 0 14px;
+  font-family: var(--pf-mono); font-size: 11.5px; color: var(--pf-azure);
+  background: var(--pf-tint); border: 1px solid var(--pf-tint-bd);
+  border-radius: 100px; padding: 3px 11px;
+}
+.pf-job__points { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 7px; }
+.pf-job__points li {
+  position: relative; padding-left: 16px;
+  font-size: 14px; color: var(--pf-muted); line-height: 1.62;
+}
+.pf-job__points li::before {
+  content: ""; position: absolute; left: 0; top: 8px;
+  width: 5px; height: 5px; border-radius: 1px; background: var(--pf-azure-2);
+}
+.pf-job__tags {
+  margin: 0; font-family: var(--pf-mono); font-size: 12px; color: var(--pf-faint);
+  line-height: 1.9; border-top: 1px solid var(--pf-line); padding-top: 12px;
+}
+
+/* ---------- education ---------- */
+.pf-edu { display: grid; grid-template-columns: 1.35fr 1fr; gap: 16px; align-items: start; }
+.pf-edu__list { display: grid; gap: 14px; }
+.pf-degree {
+  border: 1px solid var(--pf-border); border-radius: 14px; background: var(--pf-card);
+  box-shadow: var(--pf-shadow); padding: 20px 24px;
+  display: grid; grid-template-columns: 70px 1fr; gap: 20px; align-items: center;
+}
+.pf-degree__year { font-family: var(--pf-mono); font-size: 15px; font-weight: 600; color: var(--pf-azure); }
+.pf-degree h3 { margin: 0 0 4px; font-size: 16.5px; font-weight: 600; color: var(--pf-ink); }
+.pf-degree p { margin: 0; font-size: 13.5px; color: var(--pf-muted-2); }
+.pf-certs {
+  border: 1px solid var(--pf-border); border-radius: 14px; background: var(--pf-card);
+  box-shadow: var(--pf-shadow); overflow: hidden;
+}
+.pf-certs__head { padding: 15px 20px; border-bottom: 1px solid #eaf1f8; font-size: 13px; font-weight: 600; color: var(--pf-ink-2); }
+.pf-certs__body { padding: 8px 20px 14px; }
+.pf-cert { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--pf-line); }
+.pf-cert:last-child { border-bottom: none; }
+.pf-cert img { display: block; object-fit: contain; }
+.pf-cert strong { display: block; font-size: 14px; color: var(--pf-ink); }
+.pf-cert span { font-size: 12.5px; color: var(--pf-muted-2); }
+
+/* ---------- stack ---------- */
+.pf-skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.pf-skill {
+  border: 1px solid var(--pf-border); border-radius: 14px; background: var(--pf-card);
+  box-shadow: var(--pf-shadow); padding: 24px;
+}
+.pf-skill__icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 52px; height: 52px; border-radius: 12px;
+  background: var(--pf-tint); border: 1px solid var(--pf-tint-bd); margin-bottom: 16px;
+}
+.pf-skill__icon img { display: block; }
+.pf-skill h3 { margin: 0 0 10px; font-size: 16px; font-weight: 600; color: var(--pf-ink); }
+.pf-skill p { margin: 0; font-size: 14px; color: var(--pf-muted); line-height: 1.7; }
+
+/* ---------- contact ---------- */
+.pf-contact {
+  border: 1px solid var(--pf-border); border-radius: 16px;
+  background: linear-gradient(135deg, #eef5fe, #f7fbff);
+  box-shadow: 0 18px 40px -28px rgba(0,80,180,0.3);
+  padding: 38px 34px;
+  display: grid; grid-template-columns: 1fr auto; gap: 36px; align-items: center;
+}
+.pf-contact .pf-h2 { margin: 0 0 14px; }
+.pf-contact .pf-lede { margin: 0; }
+.pf-contact__links { display: flex; flex-direction: column; gap: 10px; min-width: 210px; }
+.pf-contact__links .pf-btn--primary { justify-content: space-between; padding: 13px 18px; border-radius: 9px; }
+.pf-link {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--pf-mono); font-size: 13px; padding: 13px 18px; border-radius: 9px;
+  border: 1px solid var(--pf-tint-bd); background: #fff; color: var(--pf-ink);
+  transition: border-color .15s ease, transform .15s ease;
+}
+.pf-link:hover { border-color: #b9d3f0; transform: translateY(-1px); }
+.pf-link span { color: var(--pf-faint); }
+
+/* ============================================================
+   Integration fixes — win over Material's `.md-typeset` defaults.
+   Only the elements whose plain `.pf-*` selector loses the
+   specificity battle to `.md-typeset h1/h2` / `.md-typeset a`.
+   ============================================================ */
+.md-typeset .pf-name { color: var(--pf-ink); }
+.md-typeset .pf-h2 { color: var(--pf-ink); }
+.md-typeset .portfolio a { color: inherit; text-decoration: none; }
+.md-typeset .portfolio a:hover { color: inherit; }
+.md-typeset .portfolio .pf-btn--primary { color: #fff; }
+.md-typeset .portfolio .pf-arrow { color: var(--pf-azure); }
+
+/* Home page is a full-bleed light takeover (Material header hidden): remove the
+   top margin/spacer so the dark (slate) page background can't show above the
+   portfolio's own command bar. Scoped via :has() so only the home page is hit. */
+.md-container:has(.portfolio) { background: #f4f8fd; }
+.md-main:has(.portfolio) > .md-main__inner { margin-top: 0; }
+.md-content:has(.portfolio) > .md-content__inner { padding: 0; }
+.md-content:has(.portfolio) > .md-content__inner::before { display: none; }
+
+/* Command-bar navigation (Home / Blog) */
+.pf-bar__nav { display: flex; align-items: center; gap: 4px; }
+.md-typeset .portfolio .pf-navlink {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--pf-muted-2);
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.md-typeset .portfolio .pf-navlink:hover {
+  background: var(--pf-tint);
+  color: var(--pf-azure);
+}
+.md-typeset .portfolio .pf-navlink--active { color: var(--pf-azure); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 860px) {
+  .pf-header,
+  .pf-edu,
+  .pf-contact { grid-template-columns: 1fr; }
+  .pf-skills { grid-template-columns: repeat(2, 1fr); }
+  .pf-bar__search { display: none; }
+}
+@media (max-width: 560px) {
+  .pf-wrap { padding: 0 16px 80px; }
+  .pf-skills { grid-template-columns: 1fr; }
+  .pf-job { grid-template-columns: 1fr; }
+  .pf-contact__links { min-width: 0; }
+}

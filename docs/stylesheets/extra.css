@@ -1,0 +1,125 @@
+/* ============================================================
+   Youssef OUSSAID — shared Material theme styles (blog + docs).
+   Azure-light palette to match the portfolio landing page.
+   The portfolio has its own file: docs/stylesheets/home.css.
+   ============================================================ */
+
+:root {
+  --yo-mono: "JetBrains Mono", ui-monospace, monospace;
+  --yo-azure: #0078d4;
+  --yo-azure-ink: #0067c0;
+  --yo-bg: #f4f8fd;
+}
+
+/* Azure accent + light "console" background (single light scheme). */
+[data-md-color-scheme="default"] {
+  --md-accent-fg-color: var(--yo-azure);
+  --md-typeset-a-color: var(--yo-azure-ink);
+  --md-default-bg-color: var(--yo-bg);
+
+  /* Footer — Material ships a dark footer in every scheme; make it light. */
+  --md-footer-bg-color: #ffffff;
+  --md-footer-bg-color--dark: #f4f8fd;
+  --md-footer-fg-color: #233448;
+  --md-footer-fg-color--light: #5a6b82;
+  --md-footer-fg-color--lighter: #8a99ad;
+}
+
+/* Keep true-white surfaces for code, tables and cards on the tinted bg. */
+[data-md-color-scheme="default"] {
+  --md-code-bg-color: #ffffff;
+}
+
+/* Wider, breathier content. */
+.md-grid {
+  max-width: 1180px;
+}
+
+/* Header: white bar with a subtle hairline, matching the portfolio command bar. */
+.md-header {
+  border-bottom: 1px solid #e2ebf5;
+  box-shadow: none;
+}
+.md-header[data-md-state="shadow"],
+.md-header--shadow {
+  box-shadow: 0 2px 10px -6px rgba(0, 80, 180, 0.25);
+}
+
+/* ---------- Inline header nav (Home / Blog) ---------- */
+.md-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 0.6rem;
+}
+.md-header__navlink {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--md-default-fg-color--light);
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.md-header__navlink:hover,
+.md-header__navlink:focus {
+  background: #eef5fe;
+  color: var(--yo-azure-ink);
+}
+.md-header__navlink--active {
+  color: var(--yo-azure-ink);
+}
+/* On narrow screens the title wins the space; nav stays visible and compact. */
+@media screen and (max-width: 44.9375em) {
+  .md-header__nav { margin-left: 0.2rem; }
+  .md-header__navlink { padding: 0.4rem 0.55rem; }
+}
+
+/* ---------- Footer: light with hairline borders + azure hovers ---------- */
+.md-footer { border-top: 1px solid #e2ebf5; }
+.md-footer-meta { border-top: 1px solid #e9eef5; }
+.md-footer__link:hover { opacity: 1; color: var(--yo-azure-ink); }
+.md-footer__link:hover .md-footer__title,
+.md-footer__link:hover .md-icon { color: var(--yo-azure-ink); }
+.md-footer-meta .md-social__link:hover { color: var(--yo-azure-ink); }
+
+/* ---------- Buttons ---------- */
+.md-typeset .md-button--primary {
+  background-color: var(--yo-azure);
+  border-color: var(--yo-azure);
+  color: #ffffff;
+}
+.md-typeset .md-button--primary:hover {
+  background-color: var(--yo-azure-ink);
+  border-color: var(--yo-azure-ink);
+  color: #ffffff;
+}
+
+/* ---------- Blog category cards (reusable when you add sections) ---------- */
+.md-typeset .cat-cards.cards > ul > li {
+  position: relative;
+  border: 1px solid #e2ebf5;
+  border-radius: 12px;
+  background: #ffffff;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.md-typeset .cat-cards.cards > ul > li:hover {
+  border-color: var(--yo-azure);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px -24px rgba(0, 80, 180, 0.35);
+}
+.md-typeset .cat-cards.cards > ul > li > hr {
+  margin: 0.6em 0;
+}
+.md-typeset .cat-cards.cards .twemoji.lg {
+  color: var(--yo-azure);
+}
+.md-typeset .cat-cards.cards a {
+  font-size: 1.05rem;
+}
+.md-typeset .cat-cards.cards > ul > li a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+}

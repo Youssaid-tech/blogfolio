@@ -29,6 +29,7 @@ theme:
     - navigation.instant.progress
     - navigation.tracking
     - navigation.sections
+    - navigation.indexes
     - navigation.top
     - search.suggest
     - search.highlight
@@ -36,22 +37,34 @@ theme:
     - content.code.annotate
     - toc.follow
 
+# The portfolio home and the blog landing are reached from the header buttons,
+# so they're kept out of the section sidebar (see not_in_nav below).
 nav:
-  - Home: index.md
-  - Blog:
-      - blog/index.md
+  - Azure:
+      - blog/azure/index.md
+      - blog/azure/getting-started.md
+  - Linux:
+      - blog/linux/index.md
+      - blog/linux/getting-started.md
+  - Terraform:
+      - blog/terraform/index.md
+      - blog/terraform/getting-started.md
+  - Ansible:
+      - blog/ansible/index.md
+      - blog/ansible/getting-started.md
+  - Kubernetes:
+      - blog/kubernetes/index.md
+      - blog/kubernetes/getting-started.md
+  - Monitoring:
+      - blog/monitoring/index.md
+      - blog/monitoring/getting-started.md
+
+not_in_nav: |
+  /index.md
+  /blog/index.md
 
 plugins:
   - search
-  - blog:
-      blog_dir: blog
-      blog_toc: true
-      archive: false
-      post_date_format: medium
-      post_url_format: "{categories}/{slug}"
-      post_readtime: true
-      pagination_per_page: 10
-  - tags
 
 extra:
   social:

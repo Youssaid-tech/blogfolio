@@ -1,7 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <rect width="128" height="128" rx="28" fill="#0b0c0e"/>
-  <text x="50%" y="52%" dy=".06em" text-anchor="middle" dominant-baseline="middle"
-        font-family="'JetBrains Mono', ui-monospace, monospace" font-size="62"
-        font-weight="700" fill="#c9f24a">Y</text>
-  <circle cx="92" cy="92" r="7" fill="#c9f24a"/>
+  <defs>
+    <linearGradient id="az" x1="16" y1="16" x2="112" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2892df"/>
+      <stop offset="1" stop-color="#0067c0"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#az)"/>
+  <!-- DevOps infinity loop -->
+  <path d="M64 64 C 56 49, 33 49, 33 64 C 33 79, 56 79, 64 64 C 72 49, 95 49, 95 64 C 95 79, 72 79, 64 64 Z"
+        fill="none" stroke="#ffffff" stroke-width="12"
+        stroke-linejoin="round" stroke-linecap="round"/>
 </svg>
